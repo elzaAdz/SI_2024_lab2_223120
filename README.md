@@ -4,20 +4,55 @@
 --------------------------------------------------------------------------
 ------->Kликнете Raw за подобра прегледност.
 
-3. Цикломатска комплексност=6. Формула= број на ребра - број на јазли + 2.
-Или со броење на ограничени региони.
+3. Цикломатска комплексност=6.
+Формула= број на ребра - број на јазли + 2. Или со броење на ограничени региони.
 
-4. Ке ги објаснам тест случаите со помош на предикатните јазли.
+4.TEST CASES for every branch method
 
-> if (allItems == null): ја проследуваме allItems како null.
+*На местото на Х во текстот може да стои која било вредност.
 
-> if (item.getName() == null || item.getName().length() == 0): 1. test cases -->  проследуваме item со "null" име 
-                                                               2. test cases -->  проследуваме item со празен стринг како име
+Test case 1: allItems=null, payment=X (exception)
 
->  if (item.getBarcode() != null) : 1. test case --> проследи item со barcode=null
-                                    2. test case --> проследи item со barcode!=null
+Test case 2: 
+             Oбјект од класата Item каде што:
+             item.name=null или item.name=''
+             item.barcode==null (exception)
+             
+Test case 3: 
+            Oбјект од класата Item каде што:
+            item.name!=null 
+            item.barcode!=null, но невалидна вредност на баркод (exception)
+                 Item i1=new Item("item1", "!@738dn", 200, 20)
+                 payment=X
+            
+Test case 4: 
+            Треба да се задоволени следниве критериуми:
+            item.name!=null 
+            item.barcode!=null
+            item.discount!=0
+            item.price>300
+            item.barcode.charAt(0)='0'
+            sum<=payment 
+                 Item i2=new Item("item2","028291", 400, 20)
+                 payment=10000
+            
+            
+Test case 5: 
+            Треба да се задоволени следниве критериуми:
+            item.name!=null 
+            item.barcode!=null
+            item.discount=0
+            item.price<=300
+            item.barcode.charAt(0)!='0'
+            sum>payment
+                 Item i3=new Item("item3","282951", 200, 0)
+                 payment=-2
 
-> 
+5.  if (item.getPrice() > 300 && item.getDiscount() > 0 && item.getBarcode().charAt(0)== '0')
+T--->true , F--->false, X-whatever
 
-
-
+                Primer                                                             Vistinitost
+TTT             item.price=400, item.discount=10, item.barcode="028287281"         TRUE    
+ТТF             item.price=400, item.discount=10, item.barcode="28287281"          FALSE
+TFX             item.price=400, item.discount=0                                    FALSE
+FXX             item.price=100                                                     FALSE
