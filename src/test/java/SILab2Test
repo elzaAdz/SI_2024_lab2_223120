@@ -1,1 +1,28 @@
 
+import java.*
+
+public class SILab2Test {
+
+    @Test
+    public void testCheckCart1() {
+
+        List<Item> items = new ArrayList<>();
+        items.add(new Item("11122", "I1", 200, 0));
+        items.add(new Item("38271", "I2", 300, 0.2));
+
+       boolean r = SILab2.checkCart(items, 300);
+
+       assertFalse(r);
+    }
+@Test
+    public void testCheckCart2() {
+
+        List<Item> items = new ArrayList<>();
+         items.add(new Item("37282", "I1", 300, 0));
+         items.add(new Item("11122", "I2", 100, 0.1));
+
+         boolean rez = SILab2.checkCart(items, 350);
+        assertTrue(rez);
+    }
+}
+
